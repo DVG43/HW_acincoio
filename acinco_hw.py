@@ -1,6 +1,5 @@
 import asyncio
 import aiohttp
-import time
 from more_itertools import chunked
 
 
@@ -8,22 +7,6 @@ URL = 'https://swapi.dev/api/people/'
 
 MAX = 100
 PARTITION = 10
-SLEEP_TIME = 1
-
-
-async def health_check():
-    async with aiohttp.ClientSession() as session:
-        while True:
-            try:
-                async with session.get('https://swapi.dev/api/') as response:
-                    if response.status == 200:
-                        print('OK')
-                    else:
-                        print(response.status)
-            except Exception as er:
-                print(er)
-            await asyncio.sleep(1)
-
 
 async def get_person(person_id, session):
     async with session.get(f'{URL}{person_id}') as response:
@@ -39,12 +22,47 @@ async def get_people(all_ids, partition, session):
 
 
 async def main():
-    health_check_task = asyncio.create_task(health_check())
-    print(health_check_task)
     async with aiohttp.ClientSession() as session:
         async for people in get_people(range(1, MAX +1), PARTITION, session):
-            print(len(people))
+            print(people)
 
-start = time.time()
+
 asyncio.run(main())
-print(time.time() - start)pi
+
+
+
+
+# PG_DSN = 'postgresql://dim43:1624@127.0.0.1:5431/for_flask'
+#
+# engine = create_engine(PG_DSN)   # äêëþ÷åíèå ê áàçå.
+# Session = sessionmaker(bind=engine)   # óñòðàèâàåì ðåêóðñèþ - îòêàò
+#
+# Base = declarative_base()
+#
+# Base.metadata.create_all(engine)
+#
+# class Announsment(Base):
+#
+#     __tablename__ = 'announsments'
+#     id = Column(Integer, primary_key=True)
+#     headline = Column(String(100), index=True, nullable=False)
+#     description = Column(String(200), nullable=False)
+#     created_at = Column(DateTime, server_default=func.now())
+#     owner = Column(String(50), nullable=False)
+#
+# class AnnounView(MethodView):
+#
+#      def post(self):
+#         try:
+#             validate = CreateAnnounsment(**request.json).dict()
+#         except pydantic.ValidationError as error:
+#             raise HttpError(400, error.errors())
+#
+#         with Session() as session:
+#             announ = Announsment(headline=validate['headline'],
+#                                  description=validate['description'],
+#                                  owner=validate['owner'],
+#                                  )
+#             session.add(announ)
+#             session.commit()
+#             return {'id': announ.id}
