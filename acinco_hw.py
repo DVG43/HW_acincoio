@@ -23,7 +23,7 @@ async def get_people(all_ids, partition, session):
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        async for people in get_people(range(1, MAX +1), PARTITION, session):
+        async for people in get_people(range(1, MAX + 1), PARTITION, session):
             print(people)
 
 
