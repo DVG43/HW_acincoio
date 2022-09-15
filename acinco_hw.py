@@ -32,37 +32,4 @@ asyncio.run(main())
 
 
 
-# PG_DSN = 'postgresql://dim43:1624@127.0.0.1:5431/for_flask'
 #
-# engine = create_engine(PG_DSN)   # äêëþ÷åíèå ê áàçå.
-# Session = sessionmaker(bind=engine)   # óñòðàèâàåì ðåêóðñèþ - îòêàò
-#
-# Base = declarative_base()
-#
-# Base.metadata.create_all(engine)
-#
-# class Announsment(Base):
-#
-#     __tablename__ = 'announsments'
-#     id = Column(Integer, primary_key=True)
-#     headline = Column(String(100), index=True, nullable=False)
-#     description = Column(String(200), nullable=False)
-#     created_at = Column(DateTime, server_default=func.now())
-#     owner = Column(String(50), nullable=False)
-#
-# class AnnounView(MethodView):
-#
-#      def post(self):
-#         try:
-#             validate = CreateAnnounsment(**request.json).dict()
-#         except pydantic.ValidationError as error:
-#             raise HttpError(400, error.errors())
-#
-#         with Session() as session:
-#             announ = Announsment(headline=validate['headline'],
-#                                  description=validate['description'],
-#                                  owner=validate['owner'],
-#                                  )
-#             session.add(announ)
-#             session.commit()
-#             return {'id': announ.id}
