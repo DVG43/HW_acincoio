@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+from creat_db import Filmheros, creating_db
 from more_itertools import chunked
 
 
@@ -22,9 +23,25 @@ async def get_people(all_ids, partition, session):
 
 
 async def main():
+    session_1 = creating_db()
     async with aiohttp.ClientSession() as session:
         async for people in get_people(range(1, MAX + 1), PARTITION, session):
-            print(people)
+            session_1.begin()
+            session_1.add(Filmheros(birth_year=people['birth_year'],
+                          eye_color=people['eye_color'],
+                          films=people['films'],
+                          gender=people['gender'],
+                          hair_color=people['hair_color'],
+                          height=people['height'],
+                          homeworld=people['birth_year'],
+                          mass=people['mass'],
+                          name=people['name'],
+                          skin_color=people['skin_color'],
+                          species=people['species'],
+                          starships=people['starships'],
+                          vehicles=people['vehicles'],))
+            session_1.commit()
+            #print(people)
 
 
 asyncio.run(main())
