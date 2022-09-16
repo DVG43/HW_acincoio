@@ -9,6 +9,7 @@ URL = 'https://swapi.dev/api/people/'
 MAX = 100
 PARTITION = 10
 
+
 async def get_person(person_id, session):
     async with session.get(f'{URL}{person_id}') as response:
         return await response.json()
@@ -41,12 +42,11 @@ async def main():
                           starships=people['starships'],
                           vehicles=people['vehicles'],))
             session_1.commit()
-            #print(people)
 
+            # print(people)
 
 asyncio.run(main())
 
 
 
 
-#

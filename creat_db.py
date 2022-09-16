@@ -1,5 +1,5 @@
 
-from sqlalchemy.orm import relationship, sessionmaker
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
     Column,
@@ -26,7 +26,7 @@ class Filmheros(Base):
     id = Column(Integer, primary_key=True)
     birth_year = Column(Date())
     eye_color = Column(Text())
-    films = Column(String(2000)) # строка с названиями фильмов через запятую
+    films = Column(String(2000))  # строка с названиями фильмов через запятую
     gender = Column(Text())
     hair_color = Column(Text())
     height = Column(String(10))
@@ -34,9 +34,9 @@ class Filmheros(Base):
     mass = Column(String(10))
     name = Column(String(100), nullable=False)
     skin_color = Column(String(100))
-    species = Column(String(2000)) # строка с названиями типов через запятую
-    starships = Column(String(2000)) # строка с названиями кораблей через запятую
-    vehicles = Column(String(2000)) # строка с названиями транспорта через запятую
+    species = Column(String(2000))  # строка с названиями типов через запятую
+    starships = Column(String(2000))  # строка с названиями кораблей через запятую
+    vehicles = Column(String(2000))  # строка с названиями транспорта через запятую
 
 
 def creating_db():
