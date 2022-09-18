@@ -11,7 +11,7 @@ from sqlalchemy import (
     )
 # from sqlalchemy.dialects.postgresql import UUID
 
-PG_DSN = 'postgresql://dim43:1624@127.0.0.1:5431/for_film'
+PG_DSN = 'postgresql://dim:1624@127.0.0.1:5431/for_film'
 
 engine = create_engine(PG_DSN)
 Session = sessionmaker(bind=engine)
