@@ -11,7 +11,7 @@ from sqlalchemy import (
     )
 # from sqlalchemy.dialects.postgresql import UUID
 
-PG_DSN = 'postgresql://пользователь:пароль@127.0.0.1:5431/база данных'
+PG_DSN = 'postgresql://dim43:1624@127.0.0.1:5431/for_film'
 
 engine = create_engine(PG_DSN)
 Session = sessionmaker(bind=engine)
@@ -24,7 +24,7 @@ class Filmheros(Base):
 
     __tablename__ = 'film_heros'
     id = Column(Integer, primary_key=True)
-    birth_year = Column(Date())
+    birth_year = Column(String(30))
     eye_color = Column(Text())
     films = Column(String(2000))  # строка с названиями фильмов через запятую
     gender = Column(Text())

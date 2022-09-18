@@ -27,6 +27,7 @@ async def main():
     session_1 = creating_db()
     async with aiohttp.ClientSession() as session:
         async for people in get_people(range(1, MAX + 1), PARTITION, session):
+            print(people)
             session_1.begin()
             session_1.add(Filmheros(birth_year=people['birth_year'],
                           eye_color=people['eye_color'],
