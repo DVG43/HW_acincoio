@@ -6,9 +6,9 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
-    Date,
     create_engine,
     )
+
 # from sqlalchemy.dialects.postgresql import UUID
 
 PG_DSN = 'postgresql://dim:1624@127.0.0.1:5431/for_film'
